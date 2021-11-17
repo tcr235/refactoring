@@ -123,6 +123,28 @@ class Customer {
     }
 
     /**
+     * @method htmlStatement
+     * @return {string}
+     */
+     htmlStatement() {
+        let result = `<h1>Rental Record for <strong>${this.name}</strong></h1>\n`;
+
+        result += '<ul>';
+
+        for (let rental of this.rentals) {
+            //show figures for this rental
+            result += `<li>${rental.movie.title}: ${rental.getCharge()}</li>`;
+        }
+
+        result += '</ul>';
+
+        //add footer lines
+        result += `<p>Amount owed is <strong>${this.getTotalCharge()}</strong>.<br/>You earned ${this.getTotalFrequentRenterPoints()} frequent renter points</p>`;
+
+        return result;
+    }
+
+    /**
      * @method statement
      * @return {string}
      */
