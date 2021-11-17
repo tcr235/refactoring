@@ -126,15 +126,13 @@ class Customer {
      * @method statement
      * @return {string}
      */
-    statement() {
+     statement() {
         let totalAmount = 0;
         let frequentRenterPoints = 0;
 
         let result = `Rental Record for ${this.name}\n`;
 
         for (let rental of this.rentals) {
-            let thisAmount = rental.getCharge(); // <-- novo método!
-
             frequentRenterPoints++;
 
             // add bonus for a two day new release rental
@@ -143,8 +141,8 @@ class Customer {
             }
 
             //show figures for this rental
-            result += `\t${rental.movie.title}\t${thisAmount}\n`;
-            totalAmount += thisAmount;
+            result += `\t${rental.movie.title}\t${rental.getCharge()}\n`;
+            totalAmount += rental.getCharge();
         }
 
         //add footer lines
