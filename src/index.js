@@ -140,3 +140,39 @@ class Customer {
         return result;
     }
 }
+
+function test() {
+    const c = new Customer("Alice");
+
+    const m1 = new Movie("Interstellar", Movie.CHILDREN);
+    const m2 = new Movie("2001", Movie.REGULAR);
+    const m3 = new Movie("Ad Astra", Movie.NEW_RELEASE);
+
+    const r1 = new Rental(m1, 3);
+    const r2 = new Rental(m2, 1);
+    const r3 = new Rental(m3, 10);
+
+    c.addRental(r1);
+    c.addRental(r2);
+    c.addRental(r3);
+
+    const actualOutput = c.statement();
+
+    const expectedOutput =
+        `Rental Record for Alice\n` +
+            `\tInterstellar\t1.5\n` +
+            `\t2001\t2\n` +
+            `\tAd Astra\t30\n` +
+        `Amount owed is 33.5\nYou earned 4 frequent renter points`;
+
+    const testPassed = expectedOutput === actualOutput;
+
+    console.log(testPassed ? "Ok :)" : "Failed :(");
+
+    if (!testPassed) {
+        console.log(`Expected output:\n${expectedOutput}\n\n`);
+        console.log(`Actual output:\n${actualOutput}\n`);
+    }
+}
+
+test();
