@@ -62,6 +62,33 @@ class Rental {
      * @type {number}
      */
     get daysRented() { return this._daysRented; }
+    
+    /**
+    * @return {number}
+    */
+    getCharge() { // note que não precisa mais de parâmetro!
+    let amount = 0;
+
+    switch (this.movie.priceCode) {
+        case Movie.REGULAR:
+            amount += 2;
+            if (this.daysRented > 2) {
+                amount += (this.daysRented - 2) * 1.5;
+            }
+            break;
+        case Movie.NEW_RELEASE:
+            amount += this.daysRented * 3;
+            break;
+        case Movie.CHILDREN:
+                amount += 1.5;
+            if (this.daysRented > 3) {
+                amount += (this.daysRented - 3) * 1.5;
+            }
+            break;
+    }
+
+    return amount;
+    }
 }
 
 class Customer {
@@ -89,6 +116,10 @@ class Customer {
      */
     addRental(rental) {
         this._rentals.push(rental);
+    }
+
+    amountFor(rental) {
+        return rental.getCharge(); // agora apenas delega chamada para método movido
     }
 
     /**
