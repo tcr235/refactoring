@@ -133,12 +133,7 @@ class Customer {
         let result = `Rental Record for ${this.name}\n`;
 
         for (let rental of this.rentals) {
-            frequentRenterPoints++;
-
-            // add bonus for a two day new release rental
-            if (rental.movie.priceCode === Movie.NEW_RELEASE && rental.daysRented > 1) {
-                frequentRenterPoints++;
-            }
+            frequentRenterPoints += rental.getFrequentRenterPoints(); // <-- novo método!
 
             //show figures for this rental
             result += `\t${rental.movie.title}\t${rental.getCharge()}\n`;
