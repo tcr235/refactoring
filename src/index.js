@@ -133,7 +133,7 @@ class Customer {
         let result = `Rental Record for ${this.name}\n`;
 
         for (let rental of this.rentals) {
-            let thisAmount = this.amountFor(rental); // <-- novo método!
+            let thisAmount = rental.getCharge(); // <-- novo método!
 
             frequentRenterPoints++;
 
